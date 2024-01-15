@@ -29,7 +29,7 @@ namespace FluentTrace.NetStandard
             {
                 var dumpLog = Path.Combine(LogDirectory,
                     string.Format(
-                        Constants.DumpLogFileNameTemplate,
+                        Constants.DumpLog,
                         DateTime.Now.Ticks));
 
                 file.MoveTo(dumpLog);
@@ -39,12 +39,12 @@ namespace FluentTrace.NetStandard
             config.MinimumLevel.Debug();
             config.WriteTo.Console
             (
-                outputTemplate: Constants.LogOutputTemplate
+                outputTemplate: Constants.LogTemplate
             );
             config.WriteTo.File
             (
                 path: ActiveLogFile,
-                outputTemplate: Constants.LogOutputTemplate,
+                outputTemplate: Constants.LogTemplate,
                 rollingInterval: RollingInterval.Infinite
             );
             Log.Logger = config.CreateLogger();
@@ -52,7 +52,7 @@ namespace FluentTrace.NetStandard
 
         private static string GetDefaultLogDirectory(string rootDirectory)
         {
-            return Path.Combine(rootDirectory, Constants.LogFolderName);
+            return Path.Combine(rootDirectory, Constants.LogFolder);
         }
     }
 }

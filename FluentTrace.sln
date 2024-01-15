@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTrace.NetStandard", "Src\FluentTrace.NetStandard\FluentTrace.NetStandard.csproj", "{608E030E-C65E-45FC-97A9-321151F612F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentTrace.NetStandard", "Src\FluentTrace.NetStandard\FluentTrace.NetStandard.csproj", "{608E030E-C65E-45FC-97A9-321151F612F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTrace.ConsoleDemo.NetCore", "Src\FluentTrace.ConsoleDemo.NetCore\FluentTrace.ConsoleDemo.NetCore.csproj", "{737DBEDE-9AC3-46D4-8EE0-7BFCB1F886F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{608E030E-C65E-45FC-97A9-321151F612F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{608E030E-C65E-45FC-97A9-321151F612F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{608E030E-C65E-45FC-97A9-321151F612F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737DBEDE-9AC3-46D4-8EE0-7BFCB1F886F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737DBEDE-9AC3-46D4-8EE0-7BFCB1F886F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737DBEDE-9AC3-46D4-8EE0-7BFCB1F886F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737DBEDE-9AC3-46D4-8EE0-7BFCB1F886F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

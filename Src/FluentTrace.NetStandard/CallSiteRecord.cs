@@ -1,12 +1,12 @@
 ﻿namespace FluentTrace.NetStandard
 {
-    public sealed class Frame
+    public sealed class CallSiteRecord
     {
         public string File { get; }
         public string Func { get; }
         public int Line { get; }
 
-        public Frame(string file, string func, int line)
+        internal CallSiteRecord(string file, string func, int line)
         {
             File = file;
             Func = func;

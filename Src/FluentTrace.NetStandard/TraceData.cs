@@ -2,19 +2,14 @@
 
 namespace FluentTrace.NetStandard
 {
-    public sealed class Data
+    public sealed class TraceData
     {
-        private static class Constants
-        {
-            public const string Null = "{null}";
-        }
-
-        internal Data(string name, object value, Type type, string prefix = null)
+        internal TraceData(string name, object value, Type type, string prefix = null)
         {
             Prefix = prefix;
             ParamName = name;
             ParamType = type;
-            Value = value ?? Constants.Null;
+            Value = value ?? Constants.NullData;
 
             var nullable = Nullable.GetUnderlyingType(ParamType);
             if (nullable == null)
