@@ -1,4 +1,6 @@
-﻿namespace FluentTrace.ConsoleDemo.NetCore;
+﻿using FluentTrace.NetStandard;
+
+namespace FluentTrace.ConsoleDemo.NetCore;
 
 internal static class Program
 {
@@ -11,8 +13,9 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        Console.CursorVisible = false;
+        TraceLogSetup();
 
+        Console.CursorVisible = false;
         Console.CancelKeyPress += (_, e) =>
         {
             _cts.Cancel();
@@ -26,6 +29,15 @@ internal static class Program
         }
 
         _cts.Dispose();
+    }
+
+    private static void TraceLogSetup()
+    {
+        var root = CallSite.CaptureCurrent().GetDirectoryInfo();
+        var logs = root.CreateSubdirectory("trace-logs");
+
+        TraceLog.Configuration.CompiledRootDirectory = root.FullName;
+        TraceLog.Configuration.LogDirectory = logs.FullName;
     }
 
     private static void AppLoop()

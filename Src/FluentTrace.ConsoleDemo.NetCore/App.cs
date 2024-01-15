@@ -1,12 +1,20 @@
-﻿namespace FluentTrace.ConsoleDemo.NetCore;
+﻿using FluentTrace.NetStandard;
+using System.Text.Json;
+
+namespace FluentTrace.ConsoleDemo.NetCore;
 
 internal sealed class App
 {
+    private static readonly JsonSerializerOptions _json = new()
+    {
+        WriteIndented = true
+    };
+
     private readonly CancellationTokenSource _cts;
     private readonly Random _random;
     private readonly Dictionary<int, Record> _set;
     private readonly int _sleepMs;
-    private int _startingPosition;
+    private readonly int _startingPosition;
     private readonly int _winnerGoal;
     private int? _winnerKey;
 
@@ -16,6 +24,13 @@ internal sealed class App
         int startingPosition,
         int winnerGoal)
     {
+        TraceLog.Capture().WithData(
+            (nameof(numbersInSet), numbersInSet, typeof(int)),
+            (nameof(sleepMs), sleepMs, typeof(int)),
+            (nameof(startingPosition), startingPosition, typeof(int)),
+            (nameof(winnerGoal), winnerGoal, typeof(int))
+        ).Flush();
+
         _random = new();
         _set = new();
         for (int i = 0; i < numbersInSet; i++)
@@ -106,5 +121,10 @@ internal sealed class App
         {
             WriteRecord(key);
         }
+
+        var json = JsonSerializer.Serialize(_set, _json);
+        TraceLog.Capture()
+            .WithMessage(json)
+            .Flush();
     }
 }
