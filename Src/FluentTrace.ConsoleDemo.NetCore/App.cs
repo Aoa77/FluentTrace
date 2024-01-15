@@ -1,14 +1,8 @@
 ﻿namespace FluentTrace.ConsoleDemo.NetCore;
 
-internal sealed record Record
-(
-    int Key,
-    int Frequency,
-    ConsoleColor Color
-);
-
 internal sealed class App
 {
+    private readonly CancellationTokenSource _cts;
     private readonly Random _random;
     private readonly Dictionary<int, Record> _set;
     private readonly int _sleepMs;
@@ -16,7 +10,7 @@ internal sealed class App
     private readonly int _winnerGoal;
     private int? _winnerKey;
 
-    public App(
+    public App(CancellationTokenSource cts,
         int numbersInSet,
         int sleepMs,
         int startingPosition,
@@ -28,6 +22,7 @@ internal sealed class App
         {
             _set.Add(i, new(i, 0, Colors.Default));
         }
+        _cts = cts;
         _sleepMs = sleepMs;
         _startingPosition = startingPosition;
         _winnerGoal = winnerGoal;
@@ -36,7 +31,7 @@ internal sealed class App
     public void Run()
     {
         WriteSet();
-        while (!_winnerKey.HasValue)
+        while (!_cts.IsCancellationRequested && !_winnerKey.HasValue)
         {
             var key = GenerateRandomNumber(0, _set.Count);
             IncrementRecord(key);
