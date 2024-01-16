@@ -1,4 +1,5 @@
 ﻿using FluentTrace.NetStandard;
+using System.Text.Json;
 
 namespace FluentTrace.ConsoleDemo.NetCore;
 
@@ -13,7 +14,8 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        TraceLogSetup();
+        TraceLog.Config = TraceConfig.Create.RelativeToProject();
+        TraceLog.Config.Json.WriteIndented = true;
 
         Console.CursorVisible = false;
         Console.CancelKeyPress += (_, e) =>
@@ -29,15 +31,6 @@ internal static class Program
         }
 
         _cts.Dispose();
-    }
-
-    private static void TraceLogSetup()
-    {
-        var root = CallSite.CaptureCurrent().GetDirectoryInfo();
-        var logs = root.CreateSubdirectory("trace-logs");
-
-        TraceLog.Configuration.CompiledRootDirectory = root.FullName;
-        TraceLog.Configuration.LogDirectory = logs.FullName;
     }
 
     private static void AppLoop()

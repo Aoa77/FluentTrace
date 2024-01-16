@@ -1,14 +1,9 @@
 ﻿using FluentTrace.NetStandard;
-using System.Text.Json;
 
 namespace FluentTrace.ConsoleDemo.NetCore;
 
 internal sealed class App
 {
-    private static readonly JsonSerializerOptions _json = new()
-    {
-        WriteIndented = true
-    };
 
     private readonly CancellationTokenSource _cts;
     private readonly Random _random;
@@ -122,9 +117,9 @@ internal sealed class App
             WriteRecord(key);
         }
 
-        var json = JsonSerializer.Serialize(_set, _json);
         TraceLog.Capture()
-            .WithMessage(json)
+            .WithMessage("Set written to console.")
+            .WithJson(_set)
             .Flush();
     }
 }

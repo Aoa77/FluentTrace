@@ -9,7 +9,7 @@ namespace FluentTrace.NetStandard
             Prefix = prefix;
             ParamName = name;
             ParamType = type;
-            Value = value ?? TraceLog.Configuration.NullDataDisplay;
+            Value = value ?? TraceLog.Config.NullDataDisplay;
 
             var nullable = Nullable.GetUnderlyingType(ParamType);
             if (nullable == null)

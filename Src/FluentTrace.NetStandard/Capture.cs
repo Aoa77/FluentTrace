@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FluentTrace.NetStandard
 {
@@ -55,7 +57,17 @@ namespace FluentTrace.NetStandard
             _data.AddRange(data.Select(x => new TraceData(x.Name, x.Value, x.Type)));
             return this;
         }
-        
+
+        /// <summary>
+        /// Adds data to this capture.
+        /// </summary>
+        public Capture WithJson<T>(T model)
+        {
+            return WithData((nameof(model),
+                JsonSerializer.Serialize(model, TraceLog.Config.Json),
+                typeof(T)));
+        }
+
         /// <summary>
         /// Adds data to this capture.
         /// </summary>
@@ -73,7 +85,7 @@ namespace FluentTrace.NetStandard
 
             return this;
         }
-        
+
         /// <summary>
         /// Adds data to this capture.
         /// </summary>
@@ -97,7 +109,7 @@ namespace FluentTrace.NetStandard
         {
             return WithModel(nameof(model), model, type);
         }
-        
+
         /// <summary>
         /// Adds data to this capture.
         /// </summary>

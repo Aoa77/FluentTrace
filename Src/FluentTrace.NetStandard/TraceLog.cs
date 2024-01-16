@@ -7,11 +7,15 @@ namespace FluentTrace.NetStandard
 {
     public static class TraceLog
     {
-        public static readonly Configuration Configuration
-            = new Configuration();
+        private static TraceConfig _config;
+        public static TraceConfig Config
+        {
+            get => _config ?? throw new InvalidOperationException(
+            $"{nameof(TraceLog)}.{nameof(Config)} has not been initialized. ");
+            set => _config = value;
+        }
 
         public static int SequenceNumber { get; private set; }
-            = Configuration.SequenceStart;
 
         public static Capture Capture(
             [CallerFilePath] string file = null,
@@ -44,7 +48,7 @@ namespace FluentTrace.NetStandard
         private static string FormatCallSite(CallSite call)
         {
             string file = call.File.Replace(
-                Configuration.CompiledRootDirectory, null);
+                Config.CompiledRootDirectory, null);
 
             return $@"[{call.Func}] ""{file}:line {call.Line}""";
         }
@@ -61,16 +65,24 @@ namespace FluentTrace.NetStandard
 
         private static string GetNextLogFilePath()
         {
-            if (Configuration.LogDirectory == null)
+            if (Config.LogDirectory == null)
             {
                 throw new InvalidOperationException(
-                    $"{nameof(Configuration.LogDirectory)} is null."
+                    $"{nameof(Config.LogDirectory)} is null."
                 );
             }
 
+            Directory.CreateDirectory(Config.LogDirectory);
+
+            string filename = SequenceNumber.ToString();
+            if (filename.Length > Config.SequenceLength)
+            {
+                throw new InvalidOperationException("Sequence number overflow.");
+            }
+
             return Path.Combine(
-                Configuration.LogDirectory,
-                $"{SequenceNumber}.log"
+                Config.LogDirectory,
+                $"{filename.PadLeft(Config.SequenceLength, '0')}.log"
             );
         }
     }
