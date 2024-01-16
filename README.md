@@ -21,3 +21,11 @@ TraceLog.Capture().WithData(
     (nameof(winnerGoal), winnerGoal, typeof(int))
 ).Flush();
 ```
+
+### Quick demo:
+
+Below is a quick video demonstrating trace logging in a simple C# console application.
+
+https://github.com/Aoa77/FluentTrace/assets/4643190/3f6fd84a-0ad0-4a6a-85ff-5dc624b9ccf8
+
+
