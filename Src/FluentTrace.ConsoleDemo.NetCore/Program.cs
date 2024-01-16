@@ -1,5 +1,4 @@
 ﻿using FluentTrace.NetStandard;
-using System.Text.Json;
 
 namespace FluentTrace.ConsoleDemo.NetCore;
 

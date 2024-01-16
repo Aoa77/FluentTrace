@@ -7,6 +7,7 @@ namespace FluentTrace.NetStandard
     public sealed class Factory
     {
         private const string DefaultLogFolderName = "logs";
+        internal Factory() { }
 
         /// <summary>
         /// Creates a configuration relative to the calling file. Sets root path and log directory relative to the first matching [*.csproj] project file.
