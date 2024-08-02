@@ -1,5 +1,5 @@
 # FluentTrace
-C# fluent-style extension methods for trace-logging call stack information via the System.Runtime.CompilerServices API.
+C# fluent-style extension methods for trace-logging call stack information via the `System.Runtime.CompilerServices` API.
 
 ## Setup
 Prior to logging your first `Capture`, the `TraceLog.Config` property must be initialized, either with its default constructor, or with one of the factory methods availble via `TraceConfig.Create`.
