@@ -14,7 +14,7 @@ TraceLog.Config = TraceConfig.Create.RelativeToProject();
 
 ### Capture examples:
 ```
-TraceLog.Capture().WithData(
+TraceLog.Capture().WithData
     (nameof(numbersInSet), numbersInSet, typeof(int)),
     (nameof(sleepMs), sleepMs, typeof(int)),
     (nameof(startingPosition), startingPosition, typeof(int)),
