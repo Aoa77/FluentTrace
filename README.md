@@ -1,16 +1,13 @@
 # FluentTrace
 C# fluent-style extension methods for trace-logging call stack information via the `System.Runtime.CompilerServices` API.
 
-## Setup
+## How to use
 Prior to logging your first `Capture`, the `TraceLog.Config` property must be initialized, either with its default constructor, or with one of the factory methods availble via `TraceConfig.Create`.
 
 ### Setup examples:
 ```
 TraceLog.Config = TraceConfig.Create.RelativeToProject();
 ```
-
-## Logging
-More info coming soon.
 
 ### Capture examples:
 ```
@@ -22,9 +19,9 @@ TraceLog.Capture().WithData(
 ).Flush();
 ```
 
-### Quick demo:
+### Demo:
 
-Below is a quick video demonstrating trace logging in a simple C# console application.
+Below is a video demonstrating trace logging in a simple C# console application.
 
 https://github.com/Aoa77/FluentTrace/assets/4643190/3f6fd84a-0ad0-4a6a-85ff-5dc624b9ccf8
 
